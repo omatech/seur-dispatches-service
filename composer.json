@@ -1,0 +1,45 @@
+{
+    "name": "omatech/seur-dispatches-service",
+    "description": "",
+    "keywords": [
+        "omatech",
+        "seur-dispatches-service",
+        "seur"
+    ],
+    "homepage": "https://github.com/omatech/seur-dispatches-service",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Adrià Roca",
+            "email": "aroca@omatech.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "servo/fluidxml": "^1.21"
+    },
+    "require-dev": {
+        "orchestra/testbench": "3.8.*",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Omatech\\SeurDispatchesService\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Omatech\\SeurDispatchesService\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

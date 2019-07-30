@@ -1,0 +1,42 @@
+<?php
+
+namespace Omatech\SeurDispatchesService\Api;
+
+use Omatech\SeurDispatchesService\Entities\ListRequest;
+use Omatech\SeurDispatchesService\Services\ListService;
+use Omatech\SeurDispatchesService\Values\Endpoint;
+
+class Seur
+{
+    /**
+     * @param array $data
+     * @return array
+     * @throws \Omatech\SeurDispatchesService\Exceptions\IncorrectCallResponse
+     */
+    public function dispatches(array $data)
+    {
+        $endpoint = new Endpoint('ConsultaListadoExpedicionesStr', getenv('SEUR_MODE'));
+
+        $listRequest = new ListRequest(
+            $data['in0'],
+            $data['in1'],
+            $data['in2'],
+            $data['in3'],
+            $data['in4'],
+            $data['in5'],
+            $data['in6'],
+            $data['in7'],
+            $data['in8'],
+            $data['in9'],
+            $data['in10'],
+            $data['in11'],
+            $data['in12'] ? : getenv('SEUR_USER'),
+            $data['in13'] ? : getenv('SEUR_PASSWORD'),
+            $data['in14']
+        );
+
+        $service = (new ListService($endpoint))->make($listRequest);
+
+        return $service;
+    }
+}
