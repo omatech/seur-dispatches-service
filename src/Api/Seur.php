@@ -34,8 +34,8 @@ class Seur
             $data['in9'],
             $data['in10'],
             $data['in11'],
-            $data['in12'] ?: getenv('SEUR_USER'),
-            $data['in13'] ?: getenv('SEUR_PASSWORD'),
+            $data['in12'] ?? getenv('SEUR_USER'),
+            $data['in13'] ?? getenv('SEUR_PASSWORD'),
             $data['in14']
         );
 
@@ -56,8 +56,8 @@ class Seur
         $detailRequest = new DetailRequest(
             $data['in0'],
             $data['in1'],
-            $data['in2'] ?: getenv('SEUR_USER'),
-            $data['in3'] ?: getenv('SEUR_PASSWORD')
+            $data['in2'] ?? getenv('SEUR_USER'),
+            $data['in3'] ?? getenv('SEUR_PASSWORD')
         );
 
         $service = (new DetailService($endpoint))->make($detailRequest);
