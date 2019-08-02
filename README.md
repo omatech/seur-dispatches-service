@@ -3,7 +3,11 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/omatech/seur-dispatches-service.svg?style=flat-square)](https://packagist.org/packages/omatech/seur-dispatches-service)
 [![Total Downloads](https://img.shields.io/packagist/dt/omatech/seur-dispatches-service.svg?style=flat-square)](https://packagist.org/packages/omatech/seur-dispatches-service)
 
-Use of SEUR dispatches services. Currently only the 'ConsultaListadoExpedicionesStr' service is available.
+Use of SEUR dispatches services. Available:
+
+- ConsultaListadoExpedicionesStr
+- ConsultaDetalleExpedicionesStr
+
 
 ## Installation
 
@@ -23,6 +27,8 @@ SEUR_PASSWORD=
 
 ## Usage
 
+ConsultaListadoExpedicionesStr:
+
 ``` php
 $search = [
   'in0' => 'S',
@@ -37,13 +43,36 @@ $search = [
   'in9' => '',
   'in10' => '',
   'in11' => null,
-  'in12' => 'MYUSERNAME',
-  'in13' => 'MYPASSWORD',
+  'in12' => 'MYUSERNAME', //Not mandatory if environment variables have been configured
+  'in13' => 'MYPASSWORD', //Not mandatory if environment variables have been configured
   'in14' => 'N'
 ];
 $seur = new Seur();
 $dispatches = $seur->dispatches($search);
 
+```
+
+ConsultaDetalleExpedicionesStr:
+
+``` php
+$search = [
+  'in0' => 'S',
+  'in1' => 'REF',
+  'in2' => 'MYUSERNAME', //Not mandatory if environment variables have been configured
+  'in3' => 'MYPASSWORD', //Not mandatory if environment variables have been configured
+];
+$seur = new Seur();
+$dispatch = $seur->dispatch($search);
+```
+
+``` php
+$seur = new Seur();
+$dispatch = $seur->getTypeLDispatchById('ID');
+```
+
+``` php
+$seur = new Seur();
+$dispatch = $seur->getTypeSDispatchById('ID');
 ```
 
 ### Testing

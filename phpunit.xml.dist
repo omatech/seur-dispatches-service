@@ -32,5 +32,8 @@
         <env name="SEUR_PASSWORD" value=""/>
         <env name="SEUR_CCC" value=""/>
         <env name="SEUR_MODE" value=""/>
+        <env name="SEUR_REF_EXAMPLE" value=""/>
+        <env name="SEUR_ID_L_EXAMPLE" value=""/>
+        <env name="SEUR_ID_S_EXAMPLE" value=""/>
     </php>
 </phpunit>

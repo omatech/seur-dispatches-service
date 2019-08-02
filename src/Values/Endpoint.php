@@ -21,7 +21,12 @@ class Endpoint extends BaseValue
                 'development' => 'http://seurdes.seur.com/webseur/services/WSConsultaExpediciones',
                 'pre-production' => 'https://wspre.seur.com/webseur/services/WSConsultaExpediciones',
                 'production' => 'https://ws.seur.com/webseur/services/WSConsultaExpediciones',
-            ]
+            ],
+            'ConsultaDetalleExpedicionesStr' => [
+                'development' => 'http://seurdes.seur.com/webseur/services/WSConsultaExpediciones',
+                'pre-production' => 'https://wspre.seur.com/webseur/services/WSConsultaExpediciones',
+                'production' => 'https://ws.seur.com/webseur/services/WSConsultaExpediciones',
+            ],
         ];
 
         if (!isset($endpoints[$service])) {
