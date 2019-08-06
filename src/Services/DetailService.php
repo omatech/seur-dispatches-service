@@ -4,6 +4,7 @@ namespace Omatech\SeurDispatchesService\Services;
 
 use Omatech\SeurDispatchesService\Entities\DetailRequest;
 use Omatech\SeurDispatchesService\Entities\Dispatch;
+use Omatech\SeurDispatchesService\Exceptions\ResponseError;
 use Omatech\SeurDispatchesService\Exceptions\ThereAreNotDispatchesWithThisReference;
 
 class DetailService extends Service
@@ -11,6 +12,7 @@ class DetailService extends Service
     /**
      * @param DetailRequest $request
      * @return Dispatch
+     * @throws ResponseError
      * @throws ThereAreNotDispatchesWithThisReference
      */
     public function make(DetailRequest $request): Dispatch
@@ -28,12 +30,7 @@ class DetailService extends Service
 
         $response = $this->call();
 
-        if (!is_a($response, \SimpleXMLElement::class)) {
-            throw new IncorrectCallResponse();
-        }
-        if ($response->count() === 0) {
-            throw new ThereAreNotDispatchesWithThisReference();
-        }
+        $this->validate($response);
 
         return Dispatch::fromXML($response->EXPEDICION);
     }
@@ -51,5 +48,34 @@ class DetailService extends Service
         $response = simplexml_load_string($response);
 
         return $response;
+    }
+
+    /**
+     * @param $response
+     * @throws ResponseError
+     * @throws ThereAreNotDispatchesWithThisReference
+     */
+    private function validate($response): void
+    {
+        if (!is_a($response, \SimpleXMLElement::class)) {
+            throw new IncorrectCallResponse();
+        }
+
+        if ($response->count() === 0) {
+            throw new ThereAreNotDispatchesWithThisReference();
+        }
+
+        $errorCodes = [
+            'CEXP_0001',
+            'CEXP_0002',
+            'CEXP_0003',
+            'CEXP_0004',
+            'CEXP_0005',
+        ];
+
+        if (isset($response->CODIGO) && in_array($response->CODIGO, $errorCodes)) {
+            $message = $response->DESCRIPCION ?? 'Response error';
+            throw new ResponseError((string) $message);
+        }
     }
 }
