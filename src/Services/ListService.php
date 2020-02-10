@@ -68,6 +68,8 @@ class ListService extends Service
 
         $response = str_replace('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soap:Body><consultaListadoExpedicionesStrResponse xmlns="http://consultaExpediciones.servicios.webseur"><out xmlns="http://consultaExpediciones.servicios.webseur">', '', $response);
         $response = str_replace('</out></consultaListadoExpedicionesStrResponse></soap:Body></soap:Envelope>', '', $response);
+        $response = str_replace('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soap:Body><ns1:consultaListadoExpedicionesStrResponse xmlns:ns1="http://consultaExpediciones.servicios.webseur"><ns1:out>', '', $response);
+        $response = str_replace('</ns1:out></ns1:consultaListadoExpedicionesStrResponse></soap:Body></soap:Envelope>', '', $response);
         $response = simplexml_load_string($response);
 
         return $response;
