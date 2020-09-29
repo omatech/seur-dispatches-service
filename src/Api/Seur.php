@@ -119,4 +119,22 @@ class Seur
 
         return $service;
     }
+
+    public function getCityByPostalCode(string $postalCode): City
+    {
+        $endpoint = new Endpoint('InfoPoblacionesCortoStr', getenv('SEUR_MODE'));
+        $cityRequest = new CityRequest(
+            null,
+            null,
+            $postalCode,
+            null,
+            null,
+            getenv('SEUR_USER'),
+            getenv('SEUR_PASSWORD')
+        );
+
+        $service = (new CityService($endpoint))->make($cityRequest);
+
+        return $service;
+    }
 }

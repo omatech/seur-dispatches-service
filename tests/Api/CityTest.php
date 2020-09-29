@@ -27,4 +27,17 @@ class CityTest extends BaseTestCase
         $this->assertEquals('17', $city->codProvincia());
         $this->assertEquals('GERONA', $city->nomProvincia());
     }
+
+    /** @test **/
+    public function it_returns_a_city_by_postal_code()
+    {
+        $city = (new Seur())
+            ->getCityByPostalCode('17860');
+
+        $this->assertTrue(is_a($city, City::class));
+        $this->assertEquals('17860', $city->codigoPostal());
+        $this->assertEquals('SANT JOAN DE LES ABADESSES', $city->nomPoblacion());
+        $this->assertEquals('17', $city->codProvincia());
+        $this->assertEquals('GERONA', $city->nomProvincia());
+    }
 }
