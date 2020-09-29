@@ -7,6 +7,7 @@ use Omatech\SeurDispatchesService\Entities\CityRequest;
 use Omatech\SeurDispatchesService\Entities\DetailRequest;
 use Omatech\SeurDispatchesService\Entities\Dispatch;
 use Omatech\SeurDispatchesService\Entities\ListRequest;
+use Omatech\SeurDispatchesService\Services\CityListService;
 use Omatech\SeurDispatchesService\Services\CityService;
 use Omatech\SeurDispatchesService\Services\DetailService;
 use Omatech\SeurDispatchesService\Services\ListService;
@@ -120,7 +121,7 @@ class Seur
         return $service;
     }
 
-    public function getCityByPostalCode(string $postalCode): City
+    public function getCitiesByPostalCode(string $postalCode): array
     {
         $endpoint = new Endpoint('InfoPoblacionesCortoStr', getenv('SEUR_MODE'));
         $cityRequest = new CityRequest(
@@ -133,7 +134,7 @@ class Seur
             getenv('SEUR_PASSWORD')
         );
 
-        $service = (new CityService($endpoint))->make($cityRequest);
+        $service = (new CityListService($endpoint))->make($cityRequest);
 
         return $service;
     }

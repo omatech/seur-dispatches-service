@@ -29,11 +29,14 @@ class CityTest extends BaseTestCase
     }
 
     /** @test **/
-    public function it_returns_a_city_by_postal_code()
+    public function it_returns_cities_by_postal_code()
     {
-        $city = (new Seur())
-            ->getCityByPostalCode('17860');
+        $cities = (new Seur())
+            ->getCitiesByPostalCode('17860');
 
+        $this->assertTrue(is_array($cities));
+
+        $city = $cities[0];
         $this->assertTrue(is_a($city, City::class));
         $this->assertEquals('17860', $city->codigoPostal());
         $this->assertEquals('SANT JOAN DE LES ABADESSES', $city->nomPoblacion());
