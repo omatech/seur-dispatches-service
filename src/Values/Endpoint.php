@@ -27,6 +27,9 @@ class Endpoint extends BaseValue
                 'pre-production' => 'https://wspre.seur.com/webseur/services/WSConsultaExpediciones',
                 'production' => 'https://ws.seur.com/webseur/services/WSConsultaExpediciones',
             ],
+            'InfoPoblacionesCortoStr' => [
+                'production' => 'https://ws.seur.com/WSEcatalogoPublicos/servlet/XFireServlet/WSServiciosWebPublicos',
+            ],
         ];
 
         if (!isset($endpoints[$service])) {

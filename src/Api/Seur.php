@@ -2,9 +2,12 @@
 
 namespace Omatech\SeurDispatchesService\Api;
 
+use Omatech\SeurDispatchesService\Entities\City;
+use Omatech\SeurDispatchesService\Entities\CityRequest;
 use Omatech\SeurDispatchesService\Entities\DetailRequest;
 use Omatech\SeurDispatchesService\Entities\Dispatch;
 use Omatech\SeurDispatchesService\Entities\ListRequest;
+use Omatech\SeurDispatchesService\Services\CityService;
 use Omatech\SeurDispatchesService\Services\DetailService;
 use Omatech\SeurDispatchesService\Services\ListService;
 use Omatech\SeurDispatchesService\Values\Dispatch\Type;
@@ -97,5 +100,23 @@ class Seur
             'in2' => getenv('SEUR_USER'),
             'in3' => getenv('SEUR_PASSWORD')
         ]);
+    }
+
+    public function getCityByName(string $name): City
+    {
+        $endpoint = new Endpoint('InfoPoblacionesCortoStr', getenv('SEUR_MODE'));
+        $cityRequest = new CityRequest(
+            null,
+            $name,
+            null,
+            null,
+            null,
+            getenv('SEUR_USER'),
+            getenv('SEUR_PASSWORD')
+        );
+
+        $service = (new CityService($endpoint))->make($cityRequest);
+
+        return $service;
     }
 }
